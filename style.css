@@ -124,7 +124,13 @@ h6 {
 }
 .hero{
   width: 72%;
-  margin-left: 27%;
+  height: fit-content;
+  margin-left: 27%; 
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 999;
 }
 .hero:nth-child(2){
   margin-top: 18vh;
@@ -134,4 +140,15 @@ h6 {
   font-weight: 600;
   text-transform: uppercase;
   line-height: 7.2vw;
+}
+.hero h2, h3{
+    font-size: 7.2vw;
+    font-weight: 600;
+    text-transform: uppercase;
+    line-height: 7.2vw;
+}
+.hero h2:hover{
+  -webkit-text-stroke: 1px #fff;
+  color: transparent;
+  font-weight: 500;
 }
