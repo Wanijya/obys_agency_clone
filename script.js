@@ -99,49 +99,52 @@ function cursorAnimation() {
   });
   Shery.makeMagnet("#nav-part2 h4");
 
-  var videocontainer = document.querySelector("#video-container")
-  var video = document.querySelector("#video-container video")
-  videocontainer.addEventListener("mouseenter", function(){
-    videocontainer.addEventListener("mousemove", function(dets){
+  var videocontainer = document.querySelector("#video-container");
+  var video = document.querySelector("#video-container video");
+  videocontainer.addEventListener("mouseenter", function () {
+    videocontainer.addEventListener("mousemove", function (dets) {
       gsap.to(".mousefollower", {
         opacity: 0,
-      })
+      });
       gsap.to("#video-cursor", {
         left: dets.x - 570,
         y: dets.y - 300,
-      })
-    })
-  })
-  videocontainer.addEventListener("mouseleave", function(){
+      });
+    });
+  });
+  videocontainer.addEventListener("mouseleave", function () {
     gsap.to(".mousefollower", {
       opacity: 1,
-    })
+    });
     gsap.to("#video-cursor", {
       top: "-10%",
       left: "70%",
-    })
-  })
-
-  var flag = 0
-  videocontainer.addEventListener("click", function(){
-    if(flag == 0){
+    });
+  });
+  var flag = 0;
+  videocontainer.addEventListener("click", function () {
+    if (flag == 0) {
       video.play();
-        video.style.opacity = 1;
-        document.querySelector("#video-cursor").innerHTML = `<i class="ri-pause-line"></i>`
-        gsap.to("#video-cursor", {
-          scale: 0.5
-        })
-        flag = 1
-    } else{
+      video.style.opacity = 1;
+      document.querySelector(
+        "#video-cursor"
+      ).innerHTML = `<i class="ri-pause-line"></i>`;
+      gsap.to("#video-cursor", {
+        scale: 0.5,
+      });
+      flag = 1;
+    } else {
       video.pause();
-        video.style.opacity = 0;
-        document.querySelector("#video-cursor").innerHTML = `<i class="ri-play-mini-fill"></i>`
-        gsap.to("#video-cursor", {
-          scale: 1
-        })
-        flag = 0
+      video.style.opacity = 0;
+      document.querySelector(
+        "#video-cursor"
+      ).innerHTML = `<i class="ri-play-mini-fill"></i>`;
+      gsap.to("#video-cursor", {
+        scale: 1,
+      });
+      flag = 0;
     }
-  })
+  });
 }
 function sheryAnimation() {
   Shery.imageEffect(".image-div", {
@@ -180,27 +183,62 @@ function sheryAnimation() {
     gooey: true,
   });
 }
+function flagAnimation() {
+  document.addEventListener("mousemove", function (dets) {
+    gsap.to("#flag", {
+      x: dets.x,
+      y: dets.y,
+    });
+  });
+  document.querySelector("#hero3").addEventListener("mouseenter", function () {
+    gsap.to("#flag", {
+      opacity: 1,
+    });
+  });
+  document.querySelector("#hero3").addEventListener("mouseleave", function () {
+    gsap.to("#flag", {
+      opacity: 0,
+    });
+  });
+}
+function footerAnimation() {
+  var clutter = ""
+  var clutter2 = ""
+  document.querySelector("#footer h1").textContent.split("").forEach(function (elem) {
+    clutter += `<span>${elem}</span>`
+  })
+  document.querySelector("#footer h1").innerHTML = clutter
+  document.querySelector("#footer h2").textContent.split("").forEach(function (elem) {
+    clutter2 += `<span>${elem}</span>`
+  })
+  document.querySelector("#footer h2").innerHTML = clutter2
+  document.querySelector("#footer-text").addEventListener("mouseenter", function () {
+    gsap.to("#footer h1 span", {
+      opacity: 0,
+      stagger: 0.05
+    })
+    gsap.to("#footer h2 span", {
+      delay: 0.35,
+      opacity: 1,
+      stagger: 0.1
+    })
+  })
+  document.querySelector("#footer-text").addEventListener("mouseleave", function () {
+    gsap.to("#footer h1 span", {
+      opacity: 1,
+      stagger: 0.1,
+      delay: 0.35,
+    })
+    gsap.to("#footer h2 span", {
+      opacity: 0,
+      stagger: 0.05
+    })
+  })
+}
 
-
-
-loadingAnimation();
+flagAnimation();
 cursorAnimation();
+loadingAnimation();
 locomotiveAnimation();
 sheryAnimation();
-
-document.addEventListener("mousemove", function(dets){
-  gsap.to("#flag",{
-    x: dets.x,
-    y: dets.y,
-  })
-})
-document.querySelector("#hero3").addEventListener("mouseenter", function(){
-  gsap.to("#flag",{
-    opacity: 1,
-  })
-});
-document.querySelector("#hero3").addEventListener("mouseleave", function(){
-  gsap.to("#flag",{
-    opacity: 0,
-  })
-});
+footerAnimation();
